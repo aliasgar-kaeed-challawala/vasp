@@ -10,6 +10,7 @@ export interface IUser {
   showPassword: boolean;
   code: string;
   name: string;
+  'custom:role':string;
 }
 
 @Injectable({
@@ -30,6 +31,9 @@ export class CognitoService {
     return Auth.signUp({
       username: user.email,
       password: user.password,
+      attributes:{
+        'custom:role':'user'
+      }
     });
   }
 
@@ -39,7 +43,9 @@ export class CognitoService {
 
   public signIn(user: IUser): Promise<any> {
     return Auth.signIn(user.email, user.password).then(() => {
+
       this.authenticationSubject.next(true);
+
     });
   }
 
