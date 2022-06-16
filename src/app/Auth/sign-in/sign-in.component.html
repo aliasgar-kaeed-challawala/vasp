@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div class="container">
   <div class="row mt-5">
-    <div class="col-md"></div>
+    <div class="col-lg"></div>
     <div class="col">
       <div class="d-flex flex-column">
         <div class="my-3 text-center"><h4>Sign in to your account</h4></div>
@@ -10,12 +10,15 @@
             type="email"
             class="form-control"
             placeholder="name@presidio.com"
+            id="email"
             name="email"
             #email="ngModel"
             [(ngModel)]="user.email"
+            [ngClass]="{ 'is-invalid': emailError && emailError.length > 0 }"
           />
           <label for="floatingInput">Email address</label>
         </div>
+        <p *ngIf="emailError" class="fs-6 text-danger">{{ emailError }}</p>
         <div class="form-floating mb-3">
           <input
             type="password"
@@ -24,14 +27,28 @@
             name="password"
             #password="ngModel"
             [(ngModel)]="user.password"
+            [ngClass]="{
+              'is-invalid': passwordError && passwordError.length > 0
+            }"
           />
           <label for="floatingPassword">Password</label>
         </div>
-        <button type="button" class="btn text-white small">
-          <strong>Register</strong>
+        <p *ngIf="passwordError" class="fs-6 text-danger">
+          {{ passwordError }}
+        </p>
+        <p *ngIf="error" class="fs-6 text-danger">
+          {{ error }}
+        </p>
+        <button
+          (click)="signIn()"
+          [disabled]="loading"
+          type="button"
+          class="btn text-white small"
+        >
+          <strong>Login</strong>
         </button>
       </div>
     </div>
-    <div class="col-md"></div>
+    <div class="col-lg"></div>
   </div>
 </div>

@@ -8,7 +8,6 @@ import { IUser, CognitoService } from '../../cognito.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-
   loading: boolean;
   user: IUser;
 
@@ -18,23 +17,21 @@ export class ProfileComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.cognitoService.getUser()
-    .then((user: any) => {
+    this.cognitoService.getUser().then((user: any) => {
       this.user = user.attributes;
-      console.log(this.user['custom:role']);
-      
     });
   }
 
   public update(): void {
     this.loading = true;
 
-    this.cognitoService.updateUser(this.user)
-    .then(() => {
-      this.loading = false;
-    }).catch(() => {
-      this.loading = false;
-    });
+    this.cognitoService
+      .updateUser(this.user)
+      .then(() => {
+        this.loading = false;
+      })
+      .catch(() => {
+        this.loading = false;
+      });
   }
-
 }

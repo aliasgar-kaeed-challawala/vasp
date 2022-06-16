@@ -10,6 +10,9 @@ import { IUser, CognitoService } from '../../cognito.service';
 })
 export class SignInComponent {
   loading: boolean;
+  emailError: string = '';
+  passwordError: string = '';
+  error: string = '';
   user: IUser;
 
   constructor(private router: Router, private cognitoService: CognitoService) {
@@ -19,12 +22,37 @@ export class SignInComponent {
 
   public signIn(): void {
     this.loading = true;
+    this.emailError = '';
+    this.passwordError = '';
+
+    if (!this.user.email || this.user.email === '') {
+      this.emailError = 'Email is required';
+      this.loading = false;
+      return;
+    }
+
+    var emailRegex =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@(presidio.in|presidio.com|gmail.com)$/;
+
+    if (this.user.email && !this.user.email.toLowerCase().match(emailRegex)) {
+      this.emailError = 'Email should be a valid presidio email or gmail';
+      this.loading = false;
+      return;
+    }
+
+    if (!this.user.password || this.user.password === '') {
+      this.passwordError = 'Password is required';
+      this.loading = false;
+      return;
+    }
+
     this.cognitoService
       .signIn(this.user)
       .then(() => {
         this.router.navigate(['/profile']);
       })
-      .catch(() => {
+      .catch((e) => {
+        this.error = e.message;
         this.loading = false;
       });
   }
