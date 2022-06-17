@@ -18,11 +18,11 @@ export class VaspChatbotComponent implements OnInit {
   userInput: string = "";
   messages: Message[] = [];
   lexResponse?: string;
-  
+  initialState: string="Hi, I am VASP!. How're you doing?";
+
   ngOnInit() {
+    this.messages.push(new Message(this.initialState,"Bot"));
   }
-  
-  
   postLexText() {
     var params = {
       botAlias: 'vaspchatbot',
@@ -47,9 +47,24 @@ export class VaspChatbotComponent implements OnInit {
         this.lexResponse = data.message;
       }
       this.messages.push(new Message(this.userInput,"User"));
-        this.userInput="";
+      this.userInput="";
       this.messages.push(new Message(this.lexResponse!,"Bot"));
     });
+  }
+
+  /*
+  sendMessage(){
+    this.messages.push(new Message("user",this.userInput));
+    this.userInput="";
+  }*/
+
+  isUser(sender:string){
+    if(sender=="Bot"){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 
 }

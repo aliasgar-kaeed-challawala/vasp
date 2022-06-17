@@ -1,8 +1,16 @@
 <h1>Chat Bot</h1>
-<ng-container *ngFor="let message of messages">
-  <div>
-    {{message.sender}}: {{message.content}}
+
+<div class="chatscreen">
+  <div class="chatscreen-top">
+    <div *ngFor="let message of messages" class="bot-output">
+      <div class="bot-message" [class.userStyleRight]="isUser(message.sender)">
+        <div class="message" [class.userStyleColor]="isUser(message.sender)">{{message.content}}</div>
+      </div>
+    </div>
   </div>
-</ng-container>
-<input [(ngModel)]="userInput"(keyup.enter)=postLexText>
-<button title="Post Lex Text Button" (click)="postLexText()"> Post Text </button>
+  <div class="chatscreen-bottom">
+    <div class="bot-input">
+      <input type="text" [(ngModel)]="userInput" (keyup.enter)=postLexText() class="user-input" placeholder="Ask here!">
+    </div>
+  </div>
+</div>
