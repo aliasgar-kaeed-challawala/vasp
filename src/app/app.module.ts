@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { SignUpComponent } from './Auth/sign-up/sign-up.component';
 import { SignInComponent } from './Auth/sign-in/sign-in.component';
 import { ProfileComponent } from './Auth/profile/profile.component';
+import { VaspChatbotComponent } from './vasp-chatbot/vasp-chatbot.component';
 import { NavbarComponent } from './Auth/Components/navbar/navbar.component';
 
 @NgModule({
@@ -15,6 +16,7 @@ import { NavbarComponent } from './Auth/Components/navbar/navbar.component';
     SignUpComponent,
     SignInComponent,
     ProfileComponent,
+    VaspChatbotComponent,
     NavbarComponent
   ],
   imports: [
