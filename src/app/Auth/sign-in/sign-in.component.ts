@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { IUser, CognitoService } from '../../cognito.service';
 
@@ -14,10 +14,24 @@ export class SignInComponent {
   passwordError: string = '';
   error: string = '';
   user: IUser;
+  message: string = '';
 
-  constructor(private router: Router, private cognitoService: CognitoService) {
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private cognitoService: CognitoService
+  ) {
     this.loading = false;
     this.user = {} as IUser;
+    this.activatedRoute.queryParams.subscribe((params) => {
+      if (params['state'] === 'created') {
+        this.message = 'Your account has been created.';
+      } else if (params['state'] === 'not-authenticated') {
+        this.message = 'Please sign in.';
+      } else if (params['state'] === 'not-a-user') {
+        this.message = "You don't have access to this page.";
+      }
+    });
   }
 
   public signIn(): void {
@@ -49,7 +63,13 @@ export class SignInComponent {
     this.cognitoService
       .signIn(this.user)
       .then(() => {
-        this.router.navigate(['/profile']);
+        this.cognitoService.getUser().then((user) => {
+          if (user.attributes['custom:role'] === 'admin') {
+            this.router.navigate(['/admin']);
+          } else {
+            this.router.navigate(['/chatbot']);
+          }
+        });
       })
       .catch((e) => {
         this.error = e.message;

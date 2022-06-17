@@ -120,7 +120,9 @@ export class SignUpComponent {
     this.cognitoService
       .confirmSignUp(this.user)
       .then(() => {
-        this.router.navigate(['/signIn']);
+        this.router.navigate(['/signIn'], {
+          queryParams: { state: 'created' },
+        });
       })
       .catch((e) => {
         this.error = e.message;

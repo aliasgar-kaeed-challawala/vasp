@@ -39,6 +39,9 @@
         <p *ngIf="error" class="fs-6 text-danger">
           {{ error }}
         </p>
+        <p *ngIf="message" class="fs-6 text-success">
+          {{ message }}
+        </p>
         <button
           (click)="signIn()"
           [disabled]="loading"
