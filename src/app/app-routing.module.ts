@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProfileComponent } from './Auth/profile/profile.component';
 import { SignInComponent } from './Auth/sign-in/sign-in.component';
 import { SignUpComponent } from './Auth/sign-up/sign-up.component';
+import { VaspChatbotComponent } from './vasp-chatbot/vasp-chatbot.component';
 
 const routes: Routes = [
   {
@@ -23,10 +24,14 @@ const routes: Routes = [
     path: 'signUp',
     component: SignUpComponent,
   },
+  // {
+  //   path: '**',
+  //   redirectTo: 'signIn',
+  // },
   {
-    path: '**',
-    redirectTo: 'signIn',
-  },
+    path: 'chatbot',
+    component: VaspChatbotComponent,
+  }
 ];
 
 @NgModule({

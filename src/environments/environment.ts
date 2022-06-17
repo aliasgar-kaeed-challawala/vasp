@@ -8,6 +8,8 @@ export const environment = {
     userPoolId: '',
     userPoolWebClientId: '',
   },
+  accessKeyId: '',
+  secretAccessKey: '',
 };
 
 /*
