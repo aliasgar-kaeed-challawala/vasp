@@ -110,4 +110,101 @@ export class CognitoService {
       );
     });
   }
+
+  public getUserByUsername(username: string): Promise<any> {
+    var params = {
+      UserPoolId: environment.cognito.userPoolId,
+      Username: username,
+    };
+
+    return new Promise((resolve, reject) => {
+      AWS.config.update({
+        region: environment.region,
+        accessKeyId: environment.accessKeyId,
+        secretAccessKey: environment.secretAccessKey,
+      });
+
+      var cognitoidentityserviceprovider =
+        new AWS.CognitoIdentityServiceProvider();
+
+      cognitoidentityserviceprovider.adminGetUser(
+        params,
+        (err: any, data: any) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(data);
+          }
+        }
+      );
+    });
+  }
+
+  public updateUserByUsername(username: string, user: IUser): Promise<any> {
+    var params = {
+      UserPoolId: environment.cognito.userPoolId,
+      Username: username,
+      UserAttributes: [
+        {
+          Name: 'name',
+          Value: user.name,
+        },
+        {
+          Name: 'custom:role',
+          Value: user['custom:role'],
+        },
+      ],
+    };
+
+    return new Promise((resolve, reject) => {
+      AWS.config.update({
+        region: environment.region,
+        accessKeyId: environment.accessKeyId,
+        secretAccessKey: environment.secretAccessKey,
+      });
+
+      var cognitoidentityserviceprovider =
+        new AWS.CognitoIdentityServiceProvider();
+
+      cognitoidentityserviceprovider.adminUpdateUserAttributes(
+        params,
+        (err: any, data: any) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(data);
+          }
+        }
+      );
+    });
+  }
+
+  public deleteUserByUsername(username: string): Promise<any> {
+    var params = {
+      UserPoolId: environment.cognito.userPoolId,
+      Username: username,
+    };
+
+    return new Promise((resolve, reject) => {
+      AWS.config.update({
+        region: environment.region,
+        accessKeyId: environment.accessKeyId,
+        secretAccessKey: environment.secretAccessKey,
+      });
+
+      var cognitoidentityserviceprovider =
+        new AWS.CognitoIdentityServiceProvider();
+
+      cognitoidentityserviceprovider.adminDeleteUser(
+        params,
+        (err: any, data: any) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(data);
+          }
+        }
+      );
+    });
+  }
 }
