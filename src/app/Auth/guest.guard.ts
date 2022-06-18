@@ -30,6 +30,7 @@ export class GuestGuard implements CanActivate {
           if (user.attributes['custom:role'] === 'user') {
             this.router.navigate(['/chatbot']);
           } else {
+            this.router.navigate(['/admin/dashboard']);
           }
         });
         return false;
