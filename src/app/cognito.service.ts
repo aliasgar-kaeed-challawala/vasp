@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import Amplify, { Auth } from 'aws-amplify';
+var AWS = require('aws-sdk');
 
 import { environment } from '../environments/environment';
 
@@ -79,6 +80,34 @@ export class CognitoService {
   public updateUser(user: IUser): Promise<any> {
     return Auth.currentUserPoolUser().then((cognitoUser: any) => {
       return Auth.updateUserAttributes(cognitoUser, user);
+    });
+  }
+
+  public getAllUsers(): Promise<any> {
+    var params = {
+      UserPoolId: environment.cognito.userPoolId,
+    };
+
+    return new Promise((resolve, reject) => {
+      AWS.config.update({
+        region: environment.region,
+        accessKeyId: environment.accessKeyId,
+        secretAccessKey: environment.secretAccessKey,
+      });
+
+      var cognitoidentityserviceprovider =
+        new AWS.CognitoIdentityServiceProvider();
+
+      cognitoidentityserviceprovider.listUsers(
+        params,
+        (err: any, data: any) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(data);
+          }
+        }
+      );
     });
   }
 }

@@ -28,7 +28,10 @@ export class SignInComponent {
         this.message = 'Your account has been created.';
       } else if (params['state'] === 'not-authenticated') {
         this.message = 'Please sign in.';
-      } else if (params['state'] === 'not-a-user') {
+      } else if (
+        params['state'] === 'not-a-user' ||
+        params['state'] === 'not-an-admin'
+      ) {
         this.message = "You don't have access to this page.";
       }
     });

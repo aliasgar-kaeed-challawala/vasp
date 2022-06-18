@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { ChatbotRoutingModule } from './chatbot-routing.module';
 import { ChatbotComponent } from './chatbot/chatbot.component';
+import { NavbarComponent } from './Components/navbar/navbar.component';
 
 
 @NgModule({
   declarations: [
-    ChatbotComponent
+    ChatbotComponent,
+    NavbarComponent
   ],
   imports: [
     CommonModule,
