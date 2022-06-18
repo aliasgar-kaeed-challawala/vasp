@@ -8,6 +8,8 @@ import { SignInComponent } from './Auth/sign-in/sign-in.component';
 import { SignUpComponent } from './Auth/sign-up/sign-up.component';
 import { UserGuard } from './Auth/user.guard';
 import { VaspChatbotComponent } from './vasp-chatbot/vasp-chatbot.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { AdminGuard } from './Auth/admin.guard';
 
 const routes: Routes = [
   {
@@ -42,7 +44,14 @@ const routes: Routes = [
   {
     path: 'chatbot',
     component: VaspChatbotComponent,
-  }
+  },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./admin/admin.module').then((m) => m.AdminModule),
+    canActivate: [AuthGuard, AdminGuard],
+  },
+  
 ];
 
 @NgModule({

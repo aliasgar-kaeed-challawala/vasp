@@ -68,7 +68,7 @@ export class SignInComponent {
       .then(() => {
         this.cognitoService.getUser().then((user) => {
           if (user.attributes['custom:role'] === 'admin') {
-            this.router.navigate(['/admin']);
+            this.router.navigate(['/admin/dashboard']);
           } else {
             this.router.navigate(['/chatbot']);
           }
