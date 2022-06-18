@@ -3,6 +3,7 @@ import {LexRuntime}  from 'aws-sdk';
 import { Message } from './messages';
 import { environment } from '../../environments/environment';
 import { ResponseCard } from 'aws-sdk/clients/lexruntime';
+import { CognitoService } from '../cognito.service';
 
 @Component({
   selector: 'app-vasp-chatbot',
@@ -13,13 +14,16 @@ import { ResponseCard } from 'aws-sdk/clients/lexruntime';
 
 export class VaspChatbotComponent implements OnInit {
 
-  
-  constructor() { }
+  username:string='';
+  initialState: string= `Hi ${this.username}, I am VASP!`  ;
+  constructor(private cognitoService: CognitoService) {
+   
+  }
+
   lex!: LexRuntime;
   userInput: string = "";
   messages: Message[] = [];
   lexResponse?: string;
-  initialState: string="Hi, I am VASP!. How're you doing?";
   responseCard?: ResponseCard;
   button: string[]=[];
   imgUrl: string="";
@@ -28,8 +32,13 @@ export class VaspChatbotComponent implements OnInit {
   inputText:string="";
   flag: Boolean=false;
 
-  ngOnInit() {
-    this.messages.push(new Message(this.initialState,"Bot"));
+  ngOnInit(): void {
+    
+    this.cognitoService.getUser().then((user: any) => {
+      this.username = user.attributes.name;
+      this.initialState = `Hi ${this.username}, I am VASP!. How're you doing?`;
+      this.messages.push(new Message(this.initialState,"Bot"));
+    });
   }
 
   cardResponse(b:any){
