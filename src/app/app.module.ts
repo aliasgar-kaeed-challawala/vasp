@@ -10,6 +10,7 @@ import { ProfileComponent } from './Auth/profile/profile.component';
 import { VaspChatbotComponent } from './vasp-chatbot/vasp-chatbot.component';
 import { NavbarComponent } from './Auth/Components/navbar/navbar.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

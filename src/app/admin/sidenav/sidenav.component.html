@@ -1,0 +1,46 @@
+<div class="wrapper">
+  <nav id="sidebar" [hidden]="isshow">
+    <div class="sidebar-header">
+      <h3>DASHBOARD</h3>
+      <hr />
+    </div>
+    <ul class="list-unstyled components">
+      <li>
+        <a>Users</a>
+      </li>
+      <li><a href="#">Tickets</a></li>
+      <li>
+        <a>Logout</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="content">
+    <nav class="navbar navbar-light">
+      <button
+        type="button"
+        id="sidebarCollapse"
+        class="btn"
+        (click)="toggledisplay()"
+      >
+        <i class="navbar-toggler-icon"></i>
+      </button>
+      <img class="vasp_logo" src="assets/VASP.svg" alt="LOGO" />
+    </nav>
+    <div class="card_container">
+        <div class="card users" style="width: 100%">   
+            <div class="card-body">
+                <h1>0</h1>
+              <h6 class="card-title">USERS</h6>
+            </div>
+            <img src="assets/users_logo.svg" alt="" class="users_logo">
+          </div>
+          <div class="card ticket" style="width: 100%">
+              <div class="card-body">
+                <h1>0</h1>
+                <h6 class="card-title">TICKETS</h6>
+              </div>
+              <img src="assets/ticket_logo.svg" alt="" class="ticket_logo">
+            </div>
+    </div>
+  </div>
+</div>
