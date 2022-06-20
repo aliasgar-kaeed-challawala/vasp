@@ -1,3 +1,4 @@
+import { DynamodbreadService } from './../../dynamodbread.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,11 +7,40 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tickets.component.scss'],
 })
 export class TicketsComponent implements OnInit {
-  constructor() {}
+  constructor(private dynomoService: DynamodbreadService) {}
 
-  email: string = '';
   status: string = '';
   date: string = '';
 
-  ngOnInit(): void {}
+  tickets: any[] = [];
+
+  ngOnInit(): void {
+    this.dynomoService.getItems().subscribe((data) => {
+      this.tickets = data;
+    });
+  }
+
+  onSearch() {
+    if (this.status === '' && this.date === '') {
+      return;
+    }
+
+    this.dynomoService.getItems().subscribe((data) => {
+      this.tickets = data.filter((ticket) => {
+        return (
+          ticket.Status.toLowerCase().includes(this.status.toLowerCase()) &&
+          ticket.Date.includes(this.date)
+        );
+      });
+    });
+  }
+
+  onClear() {
+    this.status = '';
+    this.date = '';
+
+    this.dynomoService.getItems().subscribe((data) => {
+      this.tickets = data;
+    });
+  }
 }
