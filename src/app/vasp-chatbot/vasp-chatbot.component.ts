@@ -16,8 +16,8 @@ import * as uuid from 'uuid';
 
 export class VaspChatbotComponent implements OnInit {
 
-  dynamodb = new DynamoDB({ accessKeyId: environment.accessKeyId, secretAccessKey: environment.secretAccessKey, region: environment.region, endpoint: environment.endpoint});
-
+  dynamodb = new DynamoDB({ accessKeyId: environment.accessKeyId, secretAccessKey: environment.secretAccessKey, region: environment.region});
+  today = Date.now();
   username: string = '';
   initialState: string = `Hi ${this.username}, I am VASP!`;
   constructor(private cognitoService: CognitoService) {
@@ -133,7 +133,8 @@ export class VaspChatbotComponent implements OnInit {
                 'Device': { S: this.responses[1] },
                 'Issue': { S: this.issue },
                 'User': {S: this.email},
-                'Status': {S: "pending"}
+                'Status': {S: "pending"},
+                'Date': {S: new Date().toISOString()}
                        }
             }
             this.dynamodb.putItem(record, function (err, data) {
