@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-lg"></div>
+    <div class="col">
+      <div class="d-flex flex-column">
+        <div class="my-3 text-center"><h4>Edit User Details</h4></div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            #name
+            class="form-control"
+            [value]="user.name"
+            id="name"
+          />
+          <label for="name" class="form-label">Name</label>
+        </div>
+        <div class="form-floating">
+          <select #role class="form-select" id="role" aria-label="role">
+            <option [selected]="user['custom:role'] == 'user'" value="user">
+              user
+            </option>
+            <option [selected]="user['custom:role'] == 'admin'" value="admin">
+              admin
+            </option>
+          </select>
+          <label for="role">Role</label>
+        </div>
+        <button type="button" class="btn text-white small" (click)="updateUser(name.value,role.value)">
+          <strong>Update</strong>
+        </button>
+      </div>
+    </div>
+    <div class="col-lg"></div>
+  </div>
+</div>
