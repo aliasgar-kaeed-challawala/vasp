@@ -10,6 +10,8 @@ export const environment = {
   },
   accessKeyId: '',
   secretAccessKey: '',
+  region: '',
+  endpoint: ''
 };
 
 /*
