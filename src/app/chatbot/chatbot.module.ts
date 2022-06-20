@@ -1,19 +1,14 @@
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ChatbotRoutingModule } from './chatbot-routing.module';
 import { ChatbotComponent } from './chatbot/chatbot.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
-
+import { TicketsComponent } from './tickets/tickets.component';
 
 @NgModule({
-  declarations: [
-    ChatbotComponent,
-    NavbarComponent
-  ],
-  imports: [
-    CommonModule,
-    ChatbotRoutingModule
-  ]
+  declarations: [ChatbotComponent, NavbarComponent, TicketsComponent],
+  imports: [CommonModule, FormsModule, ChatbotRoutingModule],
 })
-export class ChatbotModule { }
+export class ChatbotModule {}

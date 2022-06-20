@@ -32,7 +32,7 @@ const routes: Routes = [
     canActivate: [GuestGuard],
   },
   {
-    path: 'chatbot',
+    path: '',
     loadChildren: () =>
       import('./chatbot/chatbot.module').then((m) => m.ChatbotModule),
     canActivate: [AuthGuard, UserGuard],
