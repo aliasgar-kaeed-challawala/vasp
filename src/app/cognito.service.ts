@@ -141,6 +141,8 @@ export class CognitoService {
   }
 
   public updateUserByUsername(username: string, user: IUser): Promise<any> {
+    console.log(user);
+    
     var params = {
       UserPoolId: environment.cognito.userPoolId,
       Username: username,

@@ -1,0 +1,28 @@
+
+<div class="table-container">
+  <h3>User Details</h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Role</th>
+        <th scope="col">Created At</th>
+        <th scope="col">Edit/Delete User</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.Attributes[2].Value }}</td>
+        <td>{{ user.Attributes[4].Value }}</td>
+        <td>{{ user.Attributes[3].Value }}</td>
+        <td>{{ user.UserCreateDate | date: "medium" }}</td>
+        <td>
+          <a [routerLink]="['edit',user.Username]"><button type="button" class="btn btn-outline-warning">Edit</button></a>
+          <button type="button" class="btn btn-outline-danger" (click)="deleteUser(user.Username)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div> 
