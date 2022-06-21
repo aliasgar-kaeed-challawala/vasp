@@ -4,7 +4,6 @@ import { Message } from './messages';
 import { environment } from '../../../environments/environment';
 import { ResponseCard } from 'aws-sdk/clients/lexruntime';
 import { CognitoService } from '../../cognito.service';
-import { DynamodbreadService } from '../../dynamodbread.service';
 import { DynamoDB } from 'aws-sdk';
 import * as uuid from 'uuid';
 @Component({
@@ -50,7 +49,9 @@ export class ChatbotComponent implements OnInit {
   cardResponse(b: any) {
     console.log(b);
     this.responses.push(b);
+    console.log("responses "+this.responses);
     this.inputText = b;
+    console.log("inputtext "+b);
     this.flag = true;
     this.postLexText();
   }
@@ -86,6 +87,10 @@ export class ChatbotComponent implements OnInit {
       }
       else {
         this.lexResponse = data.message;
+        if(this.lexResponse?.includes("Ticket will not be raised"))
+        {
+          this.responses = [];
+        }
         this.responseCard = data.responseCard!;
         if (this.responseCard) {
           this.cardBoolean = true;
@@ -112,9 +117,10 @@ export class ChatbotComponent implements OnInit {
           if (json[key][0].value == "OK. The Ticket will be raised.") {
             const id = uuid.v4();
             var checkmsg = "Ok. How can I help with your " + this.responses[1] + "?";
+            var checkmsgreimburse = "Ok. How can I help with Issues with Reimbursement";
             console.log(checkmsg);
             for (var i = 0; i < this.messages.length; i++) {
-              if (this.messages[i].content == checkmsg) {
+              if (this.messages[i].content == checkmsg || this.messages[i].content == checkmsgreimburse) {
                 console.log("message");
                 this.issue = this.messages[i + 1].content;
                 console.log(this.issue);
