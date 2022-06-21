@@ -9,6 +9,7 @@ import { SignInComponent } from './Auth/sign-in/sign-in.component';
 import { ProfileComponent } from './Auth/profile/profile.component';
 import { NavbarComponent } from './Auth/Components/navbar/navbar.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
