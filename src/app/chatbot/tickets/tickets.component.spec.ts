@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VaspChatbotComponent } from './vasp-chatbot.component';
+import { TicketsComponent } from './tickets.component';
 
-describe('VaspChatbotComponent', () => {
-  let component: VaspChatbotComponent;
-  let fixture: ComponentFixture<VaspChatbotComponent>;
+describe('TicketsComponent', () => {
+  let component: TicketsComponent;
+  let fixture: ComponentFixture<TicketsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VaspChatbotComponent ]
+      declarations: [ TicketsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VaspChatbotComponent);
+    fixture = TestBed.createComponent(TicketsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

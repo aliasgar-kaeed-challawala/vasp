@@ -7,7 +7,6 @@ import { ProfileComponent } from './Auth/profile/profile.component';
 import { SignInComponent } from './Auth/sign-in/sign-in.component';
 import { SignUpComponent } from './Auth/sign-up/sign-up.component';
 import { UserGuard } from './Auth/user.guard';
-import { VaspChatbotComponent } from './vasp-chatbot/vasp-chatbot.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { AdminGuard } from './Auth/admin.guard';
 
@@ -32,7 +31,7 @@ const routes: Routes = [
     canActivate: [GuestGuard],
   },
   {
-    path: 'chatbot',
+    path: '',
     loadChildren: () =>
       import('./chatbot/chatbot.module').then((m) => m.ChatbotModule),
     canActivate: [AuthGuard, UserGuard],
@@ -41,10 +40,6 @@ const routes: Routes = [
   //   path: '**',
   //   redirectTo: 'signIn',
   // },
-  {
-    path: 'chatbot',
-    component: VaspChatbotComponent,
-  },
   {
     path: 'admin',
     loadChildren: () =>
