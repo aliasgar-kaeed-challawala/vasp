@@ -4,16 +4,14 @@
     <div class="col-lg"></div>
     <div class="col">
       <div class="d-flex flex-column">
-        <div class="my-3 text-center"><h4>Sign in to your account</h4></div>
+        <div class="my-3 text-center"><h4>Verify your account</h4></div>
         <div class="form-floating mb-3">
           <input
             type="email"
             class="form-control"
             placeholder="name@presidio.com"
-            id="email"
             name="email"
-            #email="ngModel"
-            [(ngModel)]="user.email"
+            [(ngModel)]="email"
             [ngClass]="{ 'is-invalid': emailError && emailError.length > 0 }"
           />
           <label for="floatingInput">Email address</label>
@@ -21,20 +19,19 @@
         <p *ngIf="emailError" class="fs-6 text-danger">{{ emailError }}</p>
         <div class="form-floating mb-3">
           <input
-            type="password"
+            type="text"
             class="form-control"
-            placeholder="Password"
-            name="password"
-            #password="ngModel"
-            [(ngModel)]="user.password"
+            placeholder="code"
+            name="code"
+            [(ngModel)]="code"
             [ngClass]="{
-              'is-invalid': passwordError && passwordError.length > 0
+              'is-invalid': codeError && codeError.length > 0
             }"
           />
-          <label for="floatingPassword">Password</label>
+          <label for="floatingCode">Code</label>
         </div>
-        <p *ngIf="passwordError" class="fs-6 text-danger">
-          {{ passwordError }}
+        <p *ngIf="codeError" class="fs-6 text-danger">
+          {{ codeError }}
         </p>
         <p *ngIf="error" class="fs-6 text-danger">
           {{ error }}
@@ -42,18 +39,20 @@
         <p *ngIf="message" class="fs-6 text-success">
           {{ message }}
         </p>
-        <div class="d-flex justify-content-end">
-          <a [routerLink]="['/verify']" class="mb-2 text-sm"
-            >Verify your account</a
-          >
-        </div>
         <button
-          (click)="signIn()"
+          (click)="verify()"
           [disabled]="loading"
           type="button"
-          class="btn text-white small"
+          class="btn yellow text-white small mb-3"
         >
-          <strong>Login</strong>
+          <strong>Verify</strong>
+        </button>
+        <button
+          [routerLink]="['/signIn']"
+          type="button"
+          class="btn btn-dark text-white small"
+        >
+          <strong>Back</strong>
         </button>
       </div>
     </div>
