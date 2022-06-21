@@ -75,14 +75,14 @@ export class DynamodbreadService {
   }
 
   async getItemsByAuth() {
+    var params = {
+      TableName: 'vasp-data',
+    };
+    var res = await this.docClient.scan(params).promise();
     return this.cognitoService.getUser().then((user) => {
-      var params = {
-        Key: {
-          User: user.attributes.email,
-        },
-        TableName: 'vasp-data',
-      };
-      return this.docClient.scan(params).promise();
+      return res.Items?.filter((item) => {
+        return item['User'] === user.attributes.email;
+      });
     });
   }
 }
