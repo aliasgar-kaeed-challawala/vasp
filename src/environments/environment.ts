@@ -5,11 +5,11 @@
 export const environment = {
   production: false,
   cognito: {
-    userPoolId: 'us-east-1_lQ6qnYCfU',
-    userPoolWebClientId: '1bat195arc387ltabp285vtlj6',
+    userPoolId: '',
+    userPoolWebClientId: '',
   },
-  accessKeyId: 'AKIA5A455FMMSK76UBP4',
-  secretAccessKey: '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',
+  accessKeyId: '',
+  secretAccessKey: '',
 };
 
 /*
