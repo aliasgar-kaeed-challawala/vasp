@@ -2,12 +2,12 @@ h1{
     margin: 0;
     background-color: #888;
   }
-  .chatscreen{
+.chatscreen{
     //position: relative;
     background-color: white;
     min-width:100%;
     // max-width: 100%;
-    min-height:100%;
+    min-height:90%;
     overflow-y: scroll;
     height: 700px;
     margin:0;
@@ -16,7 +16,8 @@ h1{
     justify-content: space-between;
     border-left:1px solid #d3d3d3;
     border-right:1px solid #d3d3d3;
-  }
+    padding-bottom:10%;
+}
   
   
   
@@ -24,10 +25,11 @@ h1{
       width:100%;
       display: flex;
       flex-direction: row;
-      justify-content: space-around;
+      justify-content: space-evenly;
       align-items:center;
       position:fixed;
       bottom:0;
+      margin-bottom: 1%;
     }
     
     .bot-output {
@@ -40,24 +42,30 @@ h1{
       gap:1%;
     }
     .message{
-      display: inline-block;
+    //   display: inline-block;
       background:#d3d3d3;
-      padding:1%;
+      padding-top:1%;
+      padding-bottom:1%;
+      padding-left:2%;
+      padding-right:2%;
       border-radius:8px;
+      text-align: center;
     }
   
     .showbuttons{
-      display:grid;
-      grid-template-columns:auto auto auto auto;
-      justify-content: start;
+      display:flex;
+    //   grid-template-columns:auto auto auto auto;
+      flex-wrap:wrap;
+      justify-content: center;
       padding-left: 2%;
-      gap:1%;
+      gap:2%;
     }
     .issue-button{
       background-color:#63c5da;
       color:white;
       border-radius: 8px;
       border: 1px solid #63c5da;
+      margin:2%
     }
     #image-issues{
       // border-radius: 20%;
@@ -66,13 +74,15 @@ h1{
     #card-style{
       margin-left:2%;
       width:40%;
-      padding-bottom:2%;
+      padding-bottom:1%;
       border: 1px solid #d3d3d3;
       background-color:#f5f5f5;
     }
     .card-body{
       padding:2%;
       padding-left:3%;
+      text-align:center;
+      font-weight: bold;
     }
     .user-input {
       width:90%;
@@ -90,10 +100,14 @@ h1{
       display: flex;
       flex-direction: row-reverse;
       gap:1%;
+      align-items: center;
     }
     .userStyleColor{
       background:#fca311;
-      padding:1%;
+      padding-top:1%;
+      padding-bottom:1%;
+      padding-left:2%;
+      padding-right:2%;
       border-radius:8px;
       color: white;
     }
