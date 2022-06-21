@@ -1,3 +1,4 @@
+import { CognitoService } from 'src/app/cognito.service';
 import { Injectable } from '@angular/core';
 import * as AWS from 'aws-sdk';
 import { Observable } from 'rxjs';
@@ -19,7 +20,7 @@ export class DynamodbreadService {
     TableName: 'vasp-data',
   };
 
-  constructor() {}
+  constructor(private cognitoService: CognitoService) {}
 
   public readItems() {
     return Observable.create(
@@ -71,5 +72,17 @@ export class DynamodbreadService {
       TableName: 'vasp-data',
     };
     return await this.docClient.get(params).promise();
+  }
+
+  async getItemsByAuth() {
+    var params = {
+      TableName: 'vasp-data',
+    };
+    var res = await this.docClient.scan(params).promise();
+    return this.cognitoService.getUser().then((user) => {
+      return res.Items?.filter((item) => {
+        return item['User'] === user.attributes.email;
+      });
+    });
   }
 }
