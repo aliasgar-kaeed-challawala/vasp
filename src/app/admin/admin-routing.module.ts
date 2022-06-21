@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EdituserComponent } from './edituser/edituser.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
 import { UserdetailsComponent } from './userdetails/userdetails.component';
 
 const routes: Routes = [
@@ -15,15 +16,15 @@ const routes: Routes = [
     component:DashboardComponent
   },
   {
-    path:'users',
-    component:UserdetailsComponent
+    path:'dashboard/users',
+    component:DashboardComponent
   },
   {
     path:'edit',
     component:EdituserComponent
   },
   {
-    path:'users/edit/:username',
+    path:'dashboard/users/edit/:username',
     component:EdituserComponent
   }
 ];
