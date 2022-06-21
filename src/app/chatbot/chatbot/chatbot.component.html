@@ -1,30 +1,74 @@
-<div>
-<app-navbar></app-navbar>
-<div class="chatscreen" style="overflow-y: scroll; margin-top: 5rem;" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+<div class="d-flex flex-col justify-content-between">
+  <app-navbar></app-navbar>
+  <div
+    class="chatscreen"
+    style="overflow-y: scroll; padding-top: 5rem"
+    #scrollMe
+    [scrollTop]="scrollMe.scrollHeight"
+  >
     <div class="chatscreen-top">
       <div *ngFor="let message of messages" class="bot-output">
-        <div class="bot-message" [class.userStyleRight]="isUser(message.sender)">
-          <img *ngIf="!isUser(message.sender)" src="https://ui-avatars.com/api/?name={{username}}&size=40&background=fca311&rounded=true" class="user-icon">
-          <img *ngIf="isUser(message.sender)" src="https://ui-avatars.com/api/?name=Bot&size=40&background=d3d3d3&rounded=true" class="user-icon">
-          <div class="message" [class.userStyleColor]="isUser(message.sender)">{{message.content}}</div>
+        <div
+          class="bot-message"
+          [class.userStyleRight]="isUser(message.sender)"
+        >
+          <img
+            *ngIf="!isUser(message.sender)"
+            src="https://ui-avatars.com/api/?name={{
+              username
+            }}&size=40&background=fca311&rounded=true"
+            class="user-icon"
+          />
+          <img
+            *ngIf="isUser(message.sender)"
+            src="https://ui-avatars.com/api/?name=Bot&size=40&background=d3d3d3&rounded=true"
+            class="user-icon"
+          />
+          <div class="message" [class.userStyleColor]="isUser(message.sender)">
+            {{ message.content }}
+          </div>
         </div>
       </div>
       <div *ngIf="cardBoolean" class="card" id="card-style">
-        <img src={{imgUrl}} max-width="100%" height="auto" class="card-img-top">
-        <div class="card-body">Select your {{title}}</div>
+        <img
+          src="{{ imgUrl }}"
+          max-width="100%"
+          height="auto"
+          class="card-img-top"
+        />
+        <div class="card-body">Select your {{ title }}</div>
         <div class="showbuttons">
           <div *ngFor="let b of button">
-            <button type="button" class="issue-button" id="{{b}}" (click)="cardResponse(b)" value={{b}}>{{b}}</button> 
+            <button
+              type="button"
+              class="issue-button"
+              id="{{ b }}"
+              (click)="cardResponse(b)"
+              value="{{ b }}"
+            >
+              {{ b }}
+            </button>
           </div>
         </div>
       </div>
     </div>
-  
+
     <!-- <div class="chatscreen-bottom"> -->
-      <div class="bot-input">
-        <input type="text" [(ngModel)]="userInput" (keyup.enter)=postLexText() class="user-input" placeholder="Ask here!">
-        <i class=" fa-2x fas fa-arrow-circle-right" style="color:'#fca311'" (click)="postLexText()"></i>
-      </div>
+
     <!-- </div> -->
+  </div>
+  <div class="bot-input px-5">
+    <input
+      type="text"
+      [(ngModel)]="userInput"
+      (keyup.enter)="postLexText()"
+      class="form-control mx-3"
+      placeholder="Ask here!"
+    />
+    <i
+      class="fa-2x fas fa-arrow-circle-right"
+      style="color: '#fca311'"
+      (click)="postLexText()"
+    ></i>
   </div>
 </div>
