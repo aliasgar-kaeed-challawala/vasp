@@ -5,13 +5,13 @@
       <hr />
     </div>
     <ul class="list-unstyled components">
-      <li>
+      <li>  
         <a [routerLink]="['/admin/dashboard']">Home</a>
       </li>
       <li>
         <a [routerLink]="['/admin/dashboard/users']">Users</a>
       </li>
-      <li><a href="#">Tickets</a></li>
+      <li><a [routerLink]="['/admin/dashboard/tickets']">Tickets</a></li>
       <li>
         <a role="button" (click)="logout()">Logout</a>
       </li>
@@ -55,5 +55,6 @@
 
     <div *ngIf="router.url=='/admin/dashboard/users'"><app-userdetails></app-userdetails></div>
     <div *ngIf="router.url=='/admin/dashboard/users/edit/:username'"><app-edituser></app-edituser></div>
+    <div *ngIf="router.url=='/admin/dashboard/tickets'"><app-alltickets></app-alltickets></div>
   </div>
 </div>

@@ -9,6 +9,8 @@ import { EdituserComponent } from './edituser/edituser.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { AllticketsComponent } from './alltickets/alltickets.component';
+import { EditticketComponent } from './editticket/editticket.component';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { RouterModule } from '@angular/router';
     DashboardComponent,
     SidenavComponent,
     UserdetailsComponent,
-    EdituserComponent
+    EdituserComponent,
+    AllticketsComponent,
+    EditticketComponent
   ],
   imports: [
     CommonModule,
