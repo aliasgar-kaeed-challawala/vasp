@@ -1,13 +1,15 @@
 <h1>VASP Chat Bot</h1>
-<div class="chatscreen" style="overflow: scroll;" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+<div class="chatscreen" style="overflow-y: scroll;" #scrollMe [scrollTop]="scrollMe.scrollHeight">
   <div class="chatscreen-top">
     <div *ngFor="let message of messages" class="bot-output">
       <div class="bot-message" [class.userStyleRight]="isUser(message.sender)">
+        <img *ngIf="!isUser(message.sender)" src="https://ui-avatars.com/api/?name={{username}}&size=40&background=fca311&rounded=true" class="user-icon">
+        <img *ngIf="isUser(message.sender)" src="https://ui-avatars.com/api/?name=BOT&size=40&background=d3d3d3&rounded=true" class="user-icon">
         <div class="message" [class.userStyleColor]="isUser(message.sender)">{{message.content}}</div>
       </div>
     </div>
     <div *ngIf="cardBoolean" class="card" id="card-style">
-      <img src={{imgUrl}} width="250px" height="250px" class="card-img-top">
+      <img src={{imgUrl}} max-width="100%" height="auto" class="card-img-top">
       <div class="card-body">Select your {{title}}</div>
       <div class="showbuttons">
         <div *ngFor="let b of button">
@@ -16,8 +18,6 @@
       </div>
     </div>
   </div>
-
-  
 
   <div class="chatscreen-bottom">
     <div class="bot-input">
