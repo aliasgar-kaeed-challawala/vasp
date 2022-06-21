@@ -48,8 +48,11 @@ a:focus {
   max-width: 250px;
   transition: all 0.3s;
   height:100%;
-  background-color: #2f363e;
+  background-color: #023047;
   color:white;
+  .sidebar-header{
+    margin-left: 10px;
+  }
 }
 #sidebar.active {
   margin-left: -250px;
@@ -115,11 +118,11 @@ ul.CTAs a {
     
 }
 .users{
-    background-color: #4b89dc;
+    background-color: #7678ed;
     color:white;
 }
 .ticket{
-    background-color: #18bb9c;
+    background-color: #0ead69;
     color:white;
 }
 
