@@ -60,8 +60,8 @@ export class DynamodbreadService {
       },
       ReturnValues: 'UPDATED_NEW',
     };
-
-    return this.docClient.update(params);
+    
+    return this.docClient.update(params).promise();
   }
 
   async readSingleItem(sno: string) {

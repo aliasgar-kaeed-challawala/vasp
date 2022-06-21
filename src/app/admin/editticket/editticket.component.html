@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-lg"></div>
+    <div class="col">
+      <div class="d-flex flex-column">
+        <div class="my-3 text-center"><h4>Update Ticket Status</h4></div>
+        <div class="form-floating mb-3">
+          <input
+            type="email"
+            #email
+            class="form-control"
+            [value]="ticket && ticket.Item['User']"
+            id="name"
+            readonly
+          />
+          <label for="email" class="form-label">Email</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            #device
+            class="form-control"
+            [value]="ticket && ticket.Item['Device']"
+            id="device"
+            readonly
+          />
+          <label for="device" class="form-label">Device</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            #issue
+            class="form-control"
+            [value]="ticket && ticket.Item['Issue']"
+            id="issue"
+            readonly
+          />
+          <label for="issue" class="form-label">Issue</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            #toissue
+            class="form-control"
+            [value]="ticket && ticket.Item['Type of Issue']"
+            id="tofissue"
+            readonly
+          />
+          <label for="tofissue" class="form-label">Type of Issue</label>
+        </div>
+        <div class="form-floating">
+          <select #status class="form-select" id="status" aria-label="status">
+            <option
+              [selected]="
+                ticket && ticket.Item['Status'].toLowerCase() == 'pending'
+              "
+              value="pending"
+            >
+              Pending
+            </option>
+            <option
+              [selected]="
+                ticket && ticket.Item['Status'].toLowerCase() == 'completed'
+              "
+              value="completed"
+            >
+              Completed
+            </option>
+          </select>
+          <label for="status">Status</label>
+        </div>
+        <button
+          type="button"
+          class="btn text-white small"
+          (click)="updateStatus(status.value)"
+        >
+          <strong>Update</strong>
+        </button>
+        <button
+          type="button"
+          class="btn back text-white small"
+          (click)="back()"
+        >
+          
+          <strong><span><i class='fas fa-angle-left' style='font-size:16px;color:white'></i></span>Back</strong>
+        </button>
+      </div>
+    </div>
+    <div class="col-lg"></div>
+  </div>
+</div>

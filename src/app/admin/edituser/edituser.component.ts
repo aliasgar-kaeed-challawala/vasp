@@ -34,9 +34,12 @@ export class EdituserComponent implements OnInit {
     console.log(this.user);
     
     this.cognitoService.updateUserByUsername(this.username,this.user).then(()=>{
-      this.router.navigate(['admin/dashboard/users']);
+      this.back();
     });
     
     
+  }
+  back(){
+    this.router.navigate(['admin/dashboard/users']);
   }
 }
