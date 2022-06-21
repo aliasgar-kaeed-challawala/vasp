@@ -12,11 +12,11 @@ export class TicketsComponent implements OnInit {
   status: string = '';
   date: string = '';
 
-  tickets: any[] = [];
+  tickets: any = [];
 
   ngOnInit(): void {
-    this.dynomoService.getItems().subscribe((data) => {
-      this.tickets = data;
+    this.dynomoService.getItemsByAuth().then((data) => {
+      this.tickets = data.Items;
     });
   }
 
