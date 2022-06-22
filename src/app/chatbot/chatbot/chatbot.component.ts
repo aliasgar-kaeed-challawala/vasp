@@ -35,24 +35,52 @@ export class ChatbotComponent implements OnInit {
   responses: string[] = [];
   issue: string = "";
   email: string = "";
+  device: string = "";
+  typeOfIssue: string = "";
+
 
   ngOnInit(): void {
-
+    this.lex = new LexRuntime({
+      accessKeyId: environment.accessKeyId,
+      secretAccessKey: environment.secretAccessKey,
+      region: "us-east-1"
+    }
+    );
+    var params = {
+      botAlias: 'vaspchatbot',
+      botName: 'Vasp',
+      inputText: 'Hi',
+      userId: 'User',
+    };
     this.cognitoService.getUser().then((user: any) => {
       this.username = user.attributes.name;
       this.email = user.attributes.email;
-      this.initialState = `Hi ${this.username}, I am VASP!. How're you doing?`;
+      this.initialState = `Hi ${this.username}, I am VASP!`;
       this.messages.push(new Message(this.initialState, "Bot"));
+      this.lex.postText(params, (err, data) => {
+        if (err) {
+          console.log(err, err.stack);
+        }
+        else {
+          this.responseCard = data.responseCard!;
+          this.cardBoolean = true;
+          this.responseCard.genericAttachments?.forEach((each) => {
+            this.imgUrl = each.imageUrl!;
+            this.title = each.title!;
+            each.buttons?.forEach((a) => {
+              this.button.push(a.text)
+            })
+          })
+          this.messages.push(new Message(data.message!, "Bot"));
+        }
+      })
     });
   }
 
   cardResponse(b: any) {
-    console.log(b);
     this.responses.push(b);
-    console.log("responses " + this.responses);
     this.inputText = b;
     this.userInput = b;
-    console.log("inputtext " + b);
     this.flag = true;
     this.postLexText();
   }
@@ -65,21 +93,12 @@ export class ChatbotComponent implements OnInit {
       inputText: 'Testing',
       userId: 'User',
     };
-
-    this.lex = new LexRuntime({
-      accessKeyId: environment.accessKeyId,
-      secretAccessKey: environment.secretAccessKey,
-      region: "us-east-1"
-    }
-    );
-    console.log(this.flag);
     if (!this.flag) {
       this.inputText = this.userInput;
       this.flag = false;
     }
     params.inputText = this.inputText;
     this.flag = false;
-    console.log(params.inputText)
     this.button = [];
     this.imgUrl = "";
     this.title = "";
@@ -89,6 +108,14 @@ export class ChatbotComponent implements OnInit {
       }
       else {
         this.lexResponse = data.message;
+        if (data.slots && data.slots!['Device']) {
+          this.typeOfIssue = "Hardware Issue";
+          this.device = data?.slots!['Device'];
+        }
+        if (data.slots && data.slots!['ReimbursementIssues']) {
+          this.typeOfIssue = "Reimbursement Issue";
+          this.device = data.slots!['ReimbursementIssues'];
+        }
         if (this.lexResponse?.includes("Ticket will not be raised")) {
           this.responses = [];
         }
@@ -108,7 +135,7 @@ export class ChatbotComponent implements OnInit {
         }
       }
       if (data.messageFormat == "Composite") {
-        var json = JSON.parse(data.message!)
+        var json = JSON.parse(data.message!);
         this.messages.push(new Message(this.inputText, "User"));
         this.userInput = "";
         Object.keys(json).forEach(key => {
@@ -117,22 +144,17 @@ export class ChatbotComponent implements OnInit {
           }
           if (json[key][0].value == "OK. The Ticket will be raised.") {
             const id = uuid.v4();
-            var checkmsg = "Ok. How can I help with your " + this.responses[1] + "?";
-            var checkmsgreimburse = "Ok. How can I help with Issues with Reimbursement";
-            console.log(checkmsg);
             for (var i = 0; i < this.messages.length; i++) {
               if (this.messages[i].content.includes("Do you want to raise a ticket?")) {
-                console.log("message");
                 this.issue = this.messages[i - 1].content;
-                console.log(this.issue);
               }
             }
             var record = {
               TableName: 'vasp-data',
               Item: {
                 'sno': { S: id },
-                'Type of Issue': { S: this.responses[0] },
-                'Device': { S: this.responses[1] },
+                'Type of Issue': { S: this.typeOfIssue },
+                'Device': { S: this.device },
                 'Issue': { S: this.issue },
                 'User': { S: this.email },
                 'Status': { S: "pending" },
