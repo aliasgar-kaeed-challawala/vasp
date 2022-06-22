@@ -20,6 +20,27 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "crypto-js/enc-base64",
+              "crypto-js/sha256",
+              "url",
+              "isomorphic-unfetch",
+              "crypto-js/lib-typedarrays",
+              "crypto-js/hmac-sha256",
+              "rypto-js/core",
+              "buffer",
+              "uuid",
+              "@aws-crypto/crc32",
+              "fast-xml-parser",
+              "@aws-crypto/sha256-browser",
+              "camelcase-keys",
+              "ulid",
+              "crypto-js/core",
+              "@aws-crypto/sha256-js",
+              "lodash/isEqual",
+              "lodash/isEmpty",
+              "lodash/get"
+            ],
             "outputPath": "dist/vasp",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -42,7 +63,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
