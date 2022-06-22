@@ -4,4 +4,7 @@ export const environment = {
     userPoolId: '',
     userPoolWebClientId: '',
   },
+  region: '',
+  accessKeyId: '',
+  secretAccessKey: '',
 };
