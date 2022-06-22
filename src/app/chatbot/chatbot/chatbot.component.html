@@ -1,10 +1,6 @@
 <div class="d-flex flex-col justify-content-between">
   <app-navbar></app-navbar>
-  <div
-    class="chatscreen container"
-    style=" padding-top: 5rem"
-    #scrollMe
-  >
+  <div class="chatscreen container" style="padding-top: 5rem">
     <div class="chatscreen-top">
       <div *ngFor="let message of messages" class="bot-output">
         <div
@@ -40,7 +36,7 @@
           <div *ngFor="let b of button">
             <button
               type="button"
-              class="btn btn-info issue-button"
+              class="btn btn-info issue-button mx-2"
               id="{{ b }}"
               (click)="cardResponse(b)"
               value="{{ b }}"
