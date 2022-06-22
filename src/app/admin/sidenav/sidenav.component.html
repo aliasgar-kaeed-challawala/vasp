@@ -1,0 +1,60 @@
+<div class="wrapper">
+  <nav id="sidebar" [hidden]="isshow">
+    <div class="sidebar-header">
+      <h3>DASHBOARD</h3>
+      <hr />
+    </div>
+    <ul class="list-unstyled components">
+      <li>  
+        <a [routerLink]="['/admin/dashboard']">Home</a>
+      </li>
+      <li>
+        <a [routerLink]="['/admin/dashboard/users']">Users</a>
+      </li>
+      <li><a [routerLink]="['/admin/dashboard/tickets']">Tickets</a></li>
+      <li>
+        <a role="button" (click)="logout()">Logout</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="content">
+    <nav class="navbar navbar-light">
+      <button
+        type="button"
+        id="sidebarCollapse"
+        class="btn"
+        (click)="toggledisplay()"
+      >
+        <i class="navbar-toggler-icon"></i>
+      </button>
+      <img class="vasp_logo" src="assets/VASP.svg" alt="LOGO" />
+    </nav>
+
+
+
+
+    <div *ngIf="router.url=='/admin/dashboard'"  class="card_container">
+        <div class="card users" style="width: 100%">   
+            <div class="card-body">
+                <h1>{{usercount}}</h1>
+              <h6 class="card-title">USERS</h6>
+            </div>
+            <img src="assets/users_logo.svg" alt="" class="users_logo">
+          </div>
+          <div class="card ticket" style="width: 100%">
+              <div class="card-body">
+                <h1>{{ticketCount}}</h1>
+                <h6 class="card-title">TICKETS</h6>
+              </div>
+              <img src="assets/ticket_logo.svg" alt="" class="ticket_logo">
+            </div>
+    </div>
+
+
+
+
+    <div *ngIf="router.url=='/admin/dashboard/users'"><app-userdetails></app-userdetails></div>
+    <div *ngIf="router.url=='/admin/dashboard/users/edit/:username'"><app-edituser></app-edituser></div>
+    <div *ngIf="router.url=='/admin/dashboard/tickets'"><app-alltickets></app-alltickets></div>
+  </div>
+</div>

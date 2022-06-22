@@ -42,6 +42,11 @@
         <p *ngIf="message" class="fs-6 text-success">
           {{ message }}
         </p>
+        <div class="d-flex justify-content-end">
+          <a [routerLink]="['/verify']" class="mb-2 text-sm"
+            >Verify your account</a
+          >
+        </div>
         <button
           (click)="signIn()"
           [disabled]="loading"

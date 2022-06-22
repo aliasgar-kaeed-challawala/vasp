@@ -17,9 +17,13 @@ export class UserdetailsComponent implements OnInit {
    getAllUsers(){
     this.cognitoService.getAllUsers().then((users:any)=>{
       this.users=users.Users;
-      console.log(this.users);
+      console.log("1");
+      console.log(this.users.length);
+      console.log("2");
       console.log(users.Users);
+      console.log("3");
       console.log(users.Users[0].Attributes);
+      console.log("4");
       console.log(users.Users[0].Attributes[2].Value);
       
     })

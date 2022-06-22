@@ -1,0 +1,61 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-lg"></div>
+    <div class="col">
+      <div class="d-flex flex-column">
+        <div class="my-3 text-center"><h4>Verify your account</h4></div>
+        <div class="form-floating mb-3">
+          <input
+            type="email"
+            class="form-control"
+            placeholder="name@presidio.com"
+            name="email"
+            [(ngModel)]="email"
+            [ngClass]="{ 'is-invalid': emailError && emailError.length > 0 }"
+          />
+          <label for="floatingInput">Email address</label>
+        </div>
+        <p *ngIf="emailError" class="fs-6 text-danger">{{ emailError }}</p>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="code"
+            name="code"
+            [(ngModel)]="code"
+            [ngClass]="{
+              'is-invalid': codeError && codeError.length > 0
+            }"
+          />
+          <label for="floatingCode">Code</label>
+        </div>
+        <p *ngIf="codeError" class="fs-6 text-danger">
+          {{ codeError }}
+        </p>
+        <p *ngIf="error" class="fs-6 text-danger">
+          {{ error }}
+        </p>
+        <p *ngIf="message" class="fs-6 text-success">
+          {{ message }}
+        </p>
+        <button
+          (click)="verify()"
+          [disabled]="loading"
+          type="button"
+          class="btn yellow text-white small mb-3"
+        >
+          <strong>Verify</strong>
+        </button>
+        <button
+          [routerLink]="['/signIn']"
+          type="button"
+          class="btn btn-dark text-white small"
+        >
+          <strong>Back</strong>
+        </button>
+      </div>
+    </div>
+    <div class="col-lg"></div>
+  </div>
+</div>

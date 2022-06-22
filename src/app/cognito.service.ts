@@ -43,6 +43,10 @@ export class CognitoService {
     return Auth.confirmSignUp(user.email, user.code);
   }
 
+  public verifyCodeByEmail(email: string, code: string): Promise<any> {
+    return Auth.confirmSignUp(email, code);
+  }
+
   public signIn(user: IUser): Promise<any> {
     return Auth.signIn(user.email, user.password).then(() => {
       this.authenticationSubject.next(true);
@@ -142,7 +146,7 @@ export class CognitoService {
 
   public updateUserByUsername(username: string, user: IUser): Promise<any> {
     console.log(user);
-    
+
     var params = {
       UserPoolId: environment.cognito.userPoolId,
       Username: username,
