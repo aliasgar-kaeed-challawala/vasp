@@ -54,5 +54,8 @@
   "bugs": {
     "url": "https://github.com/aliasgar-kaeed-challawala/vasp/issues"
   },
-  "homepage": "https://github.com/aliasgar-kaeed-challawala/vasp#readme"
+  "homepage": "https://github.com/aliasgar-kaeed-challawala/vasp#readme",
+  "overrides": {
+    "autoprefixer": "10.4.5"
+  }
 }
