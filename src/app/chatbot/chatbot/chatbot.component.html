@@ -1,8 +1,8 @@
 <div class="d-flex flex-col justify-content-between">
   <app-navbar></app-navbar>
   <div
-    class="chatscreen"
-    style="overflow-y: scroll; padding-top: 5rem"
+    class="chatscreen container"
+    style=" padding-top: 5rem"
     #scrollMe
     [scrollTop]="scrollMe.scrollHeight"
   >
@@ -29,11 +29,11 @@
           </div>
         </div>
       </div>
-      <div *ngIf="cardBoolean" class="card" id="card-style">
+      <div *ngIf="cardBoolean" class="card d-flex" id="card-style">
         <img
           src="{{ imgUrl }}"
-          max-width="100%"
-          height="auto"
+          max-width="250px"
+          height="250px"
           class="card-img-top"
         />
         <div class="card-body">Select your {{ title }}</div>
@@ -41,7 +41,7 @@
           <div *ngFor="let b of button">
             <button
               type="button"
-              class="issue-button"
+              class="btn btn-info issue-button"
               id="{{ b }}"
               (click)="cardResponse(b)"
               value="{{ b }}"
@@ -57,7 +57,7 @@
 
     <!-- </div> -->
   </div>
-  <div class="bot-input px-5 bg-white">
+  <div class="bot-input px-5">
     <input
       type="text"
       [(ngModel)]="userInput"
