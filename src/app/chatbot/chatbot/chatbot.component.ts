@@ -49,14 +49,16 @@ export class ChatbotComponent implements OnInit {
   cardResponse(b: any) {
     console.log(b);
     this.responses.push(b);
-    console.log("responses "+this.responses);
+    console.log("responses " + this.responses);
     this.inputText = b;
-    console.log("inputtext "+b);
+    this.userInput = b;
+    console.log("inputtext " + b);
     this.flag = true;
     this.postLexText();
   }
 
   postLexText() {
+    if (this.userInput == '') { return }
     var params = {
       botAlias: 'vaspchatbot',
       botName: 'Vasp',
@@ -87,8 +89,7 @@ export class ChatbotComponent implements OnInit {
       }
       else {
         this.lexResponse = data.message;
-        if(this.lexResponse?.includes("Ticket will not be raised"))
-        {
+        if (this.lexResponse?.includes("Ticket will not be raised")) {
           this.responses = [];
         }
         this.responseCard = data.responseCard!;
@@ -120,9 +121,9 @@ export class ChatbotComponent implements OnInit {
             var checkmsgreimburse = "Ok. How can I help with Issues with Reimbursement";
             console.log(checkmsg);
             for (var i = 0; i < this.messages.length; i++) {
-              if (this.messages[i].content == checkmsg || this.messages[i].content == checkmsgreimburse) {
+              if (this.messages[i].content.includes("Do you want to raise a ticket?")) {
                 console.log("message");
-                this.issue = this.messages[i + 1].content;
+                this.issue = this.messages[i - 1].content;
                 console.log(this.issue);
               }
             }

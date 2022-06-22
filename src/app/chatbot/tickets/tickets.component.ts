@@ -7,16 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tickets.component.scss'],
 })
 export class TicketsComponent implements OnInit {
-  constructor(private dynomoService: DynamodbreadService) {}
+  constructor(private dynomoService: DynamodbreadService) { }
 
   status: string = '';
   date: string = '';
-
+  loading: boolean = true;
   tickets: any = [];
 
   ngOnInit(): void {
     this.dynomoService.getItemsByAuth().then((data) => {
       this.tickets = data;
+      this.loading = false;
     });
   }
 
@@ -24,6 +25,8 @@ export class TicketsComponent implements OnInit {
     if (this.status === '' && this.date === '') {
       return;
     }
+    this.tickets = [];
+    this.loading = true;
 
     this.dynomoService.getItemsByAuth().then((data) => {
       this.tickets = data?.filter((ticket) => {
@@ -32,15 +35,19 @@ export class TicketsComponent implements OnInit {
           ticket['Date'].includes(this.date)
         );
       });
+      this.loading = false;
     });
   }
 
   onClear() {
     this.status = '';
     this.date = '';
+    this.tickets = [];
+    this.loading = true;
 
     this.dynomoService.getItemsByAuth().then((data) => {
       this.tickets = data;
+      this.loading = false;
     });
   }
 }

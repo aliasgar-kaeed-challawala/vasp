@@ -5,13 +5,7 @@
     <div class="row">
       <div class="col-12 col-md-3">
         <div class="form-floating mb-3">
-          <select
-            id="status"
-            name="status"
-            [(ngModel)]="status"
-            class="form-select"
-            placeholder="Select"
-          >
+          <select id="status" name="status" [(ngModel)]="status" class="form-select" placeholder="Select">
             <option disabled>Select</option>
             <option value="pending">Pending</option>
             <option value="completed">Completed</option>
@@ -21,13 +15,7 @@
       </div>
       <div class="col-12 col-md-3">
         <div class="form-floating mb-3">
-          <input
-            type="date"
-            class="form-control"
-            id="date"
-            name="date"
-            [(ngModel)]="date"
-          />
+          <input type="date" class="form-control" id="date" name="date" [(ngModel)]="date" />
           <label for="floatingInput">Date</label>
         </div>
       </div>
@@ -62,19 +50,16 @@
             <td>{{ ticket.Issue ?? "" }}</td>
             <td>{{ ticket["Type of Issue"] ?? "" }}</td>
             <td>
-              <span
-                [ngClass]="[
+              <span [ngClass]="[
                   ticket.Status.toLowerCase() === 'completed'
                     ? 'badge rounded-pill bg-success'
                     : 'badge rounded-pill bg-danger'
-                ]"
-                >{{ ticket.Status ?? "" }}</span
-              >
+                ]">{{ ticket.Status ?? "" }}</span>
             </td>
             <td>{{ (ticket.Date | date: "medium") ?? "" }}</td>
           </tr>
           <tr *ngIf="tickets.length == 0">
-            <td colspan="100" class="text-center">No tickets found</td>
+            <td colspan="100" class="text-center">{{loading?"Loading...":"No tickets found"}}</td>
           </tr>
         </tbody>
       </table>
