@@ -69,10 +69,14 @@
           </select>
           <label for="status">Status</label>
         </div>
+        <div class="form-floating">
+          <textarea #comments class="form-control comments" id="comments" rows="3"></textarea>
+          <label id="cmt-lbl" for="comments">Comments</label>
+        </div>
         <button
           type="button"
           class="btn text-white small"
-          (click)="updateStatus(status.value)"
+          (click)="updateStatus(status.value,comments.value)"
         >
           <strong>Update</strong>
         </button>

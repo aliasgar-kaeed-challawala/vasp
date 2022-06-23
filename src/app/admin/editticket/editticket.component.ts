@@ -23,7 +23,9 @@ export class EditticketComponent implements OnInit {
     })
     
   }
-  updateStatus(status:string){
+  updateStatus(status:string,comment:string){
+    console.log(comment);
+    
     this.dynamodb.updateItems(this.ticketid,status).then(()=>{
       this.back();
     })
