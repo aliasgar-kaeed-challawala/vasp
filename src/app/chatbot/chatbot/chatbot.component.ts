@@ -97,6 +97,9 @@ export class ChatbotComponent implements OnInit {
       this.inputText = this.userInput;
       this.flag = false;
     }
+    if (this.inputText == "not working" || this.inputText == "broken") {
+      this.inputText = this.device + " " + this.inputText;
+    }
     params.inputText = this.inputText;
     this.flag = false;
     this.button = [];
@@ -147,6 +150,10 @@ export class ChatbotComponent implements OnInit {
             for (var i = 0; i < this.messages.length; i++) {
               if (this.messages[i].content.includes("Do you want to raise a ticket?")) {
                 this.issue = this.messages[i - 1].content;
+                if (this.issue == "broken" || this.issue == "not working") {
+                  this.issue += this.device + " ";
+                  console.log(this.issue);
+                }
               }
             }
             var record = {
