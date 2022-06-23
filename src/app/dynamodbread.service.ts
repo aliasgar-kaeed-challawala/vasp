@@ -20,6 +20,13 @@ export class DynamodbreadService {
     return this.Http.get<any[]>(environment.apiUrl + '/tickets');
   }
 
+  public async createItem(typeOfIssue: string, device: string, issue: string) {
+    const user = await this.cognitoService.getUser();
+    return this.Http.get<any>(
+      `${environment.apiUrl}/tickets/create?typeOfIssue=${typeOfIssue}&device=${device}&issue=${issue}&email=${user.attributes.email}`
+    );
+  }
+
   public updateItems(
     sno: string,
     status: string,
