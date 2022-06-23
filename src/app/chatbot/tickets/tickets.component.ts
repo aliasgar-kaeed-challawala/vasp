@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tickets.component.scss'],
 })
 export class TicketsComponent implements OnInit {
-  constructor(private dynomoService: DynamodbreadService) { }
+  constructor(private dynomoService: DynamodbreadService) {}
 
   status: string = '';
   date: string = '';
@@ -16,8 +16,8 @@ export class TicketsComponent implements OnInit {
 
   ngOnInit(): void {
     this.dynomoService.getItemsByAuth().then((data) => {
-      console.log(data);
       this.tickets = data;
+      this.tickets = this.tickets.Items;
       this.loading = false;
     });
   }
@@ -30,7 +30,15 @@ export class TicketsComponent implements OnInit {
     this.loading = true;
 
     this.dynomoService.getItemsByAuth().then((data) => {
-      console.log(data);
+      this.tickets = data;
+
+      this.tickets = this.tickets.Items.filter((ticket: any) => {
+        return (
+          ticket['Status'].toLowerCase().includes(this.status.toLowerCase()) &&
+          ticket['Date'].includes(this.date)
+        );
+      });
+
       this.loading = false;
     });
   }
@@ -43,6 +51,7 @@ export class TicketsComponent implements OnInit {
 
     this.dynomoService.getItemsByAuth().then((data) => {
       this.tickets = data;
+      this.tickets = this.tickets.Items;
       this.loading = false;
     });
   }

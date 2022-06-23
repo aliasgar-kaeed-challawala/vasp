@@ -19,17 +19,21 @@ export class EditticketComponent implements OnInit {
 
   ngOnInit(): void {
     this.ticketid = this.route.snapshot.paramMap.get('id');
-    console.log(this.dynamodb.readSingleItem(this.ticketid));
+    this.dynamodb.readSingleItem(this.ticketid).subscribe((data) => {
+      this.ticket = data;
+    });
   }
+
   updateStatus(status: string, comment: string, email: string) {
+    console.log(status, comment, email);
     this.dynamodb
       .updateItems(this.ticketid, status, comment, email)
-      .then(() => {
-        this.back();
+      .subscribe((data) => {
+        console.log(data);
       });
   }
 
   back() {
-    this.router.navigate(['admin/dashboard/tickets']);
+    // this.router.navigate(['admin/dashboard/tickets']);
   }
 }

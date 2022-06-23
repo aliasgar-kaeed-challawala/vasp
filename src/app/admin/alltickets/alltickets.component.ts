@@ -12,12 +12,12 @@ export class AllticketsComponent implements OnInit {
   status: string = '';
   date: string = '';
 
-  tickets: any = [];
+  tickets: any = [] || {};
 
   ngOnInit(): void {
     this.dynomoService.getItems().subscribe((data) => {
       this.tickets = data;
-      console.log(this.tickets);
+      this.tickets = this.tickets.Items;
     });
   }
 
@@ -27,7 +27,9 @@ export class AllticketsComponent implements OnInit {
     }
 
     this.dynomoService.getItems().subscribe((data) => {
-      this.tickets = data?.filter((ticket) => {
+      this.tickets = data;
+
+      this.tickets = this.tickets.Items.filter((ticket: any) => {
         return (
           ticket['Status'].toLowerCase().includes(this.status.toLowerCase()) &&
           ticket['Date'].includes(this.date)
@@ -42,6 +44,7 @@ export class AllticketsComponent implements OnInit {
 
     this.dynomoService.getItems().subscribe((data) => {
       this.tickets = data;
+      this.tickets = this.tickets.Items;
     });
   }
 }

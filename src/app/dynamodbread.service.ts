@@ -20,30 +20,31 @@ export class DynamodbreadService {
     return this.Http.get<any[]>(environment.apiUrl + '/tickets');
   }
 
-  async updateItems(
+  public updateItems(
     sno: string,
     status: string,
     comments: string,
     email: string
   ) {
-    return this.Http.post(environment.apiUrl + '/tickets/' + sno, {
-      status,
-      comments,
-      email,
-    });
-  }
-
-  async readSingleItem(sno: string) {
-    return this.Http.get<any>(environment.apiUrl + '/tickets/' + sno).subscribe(
-      (data) => {}
+    return this.Http.post(
+      environment.apiUrl + '/tickets/' + sno,
+      {
+        status,
+        comments,
+        email,
+      },
+      { headers: { 'Content-Type': 'application/json' } }
     );
   }
 
-  public getItemsByAuth() {
-    return this.cognitoService.getUser().then((user) => {
-      return this.Http.get<any[]>(
-        environment.apiUrl + '/tickets/users/' + user.attributes.email
-      );
-    });
+  public readSingleItem(sno: string): Observable<any[]> {
+    return this.Http.get<any>(environment.apiUrl + '/tickets/' + sno);
+  }
+
+  public async getItemsByAuth() {
+    const user = await this.cognitoService.getUser();
+    return this.Http.get<any[]>(
+      environment.apiUrl + '/tickets/users/' + user.attributes.email
+    ).toPromise();
   }
 }
