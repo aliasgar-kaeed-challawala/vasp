@@ -29,11 +29,11 @@ export class EditticketComponent implements OnInit {
     this.dynamodb
       .updateItems(this.ticketid, status, comment, email)
       .subscribe((data) => {
-        console.log(data);
+        this.back();
       });
   }
 
   back() {
-    // this.router.navigate(['admin/dashboard/tickets']);
+    this.router.navigate(['admin/dashboard/tickets']);
   }
 }

@@ -61,8 +61,12 @@ h1 {
   row-gap: 0.5rem;
 }
 .issue-button {
-  color: white;
   margin-top: 2%;
+  color: #000;
+
+  &:hover {
+    color: white;
+  }
 }
 #image-issues {
   padding-left: 3%;

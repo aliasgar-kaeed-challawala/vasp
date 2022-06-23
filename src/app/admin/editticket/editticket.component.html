@@ -75,6 +75,7 @@
             class="form-control comments"
             id="comments"
             rows="3"
+            [value]="ticket && ticket.Item['Comments']"
           ></textarea>
           <label id="cmt-lbl" for="comments">Comments</label>
         </div>

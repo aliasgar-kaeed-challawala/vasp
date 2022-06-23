@@ -11,12 +11,12 @@
             *ngIf="!isUser(message.sender)"
             src="https://ui-avatars.com/api/?name={{
               username
-            }}&size=40&background=fca311&rounded=true"
+            }}&size=35&background=fca311&color=fff&rounded=true"
             class="user-icon"
           />
           <img
             *ngIf="isUser(message.sender)"
-            src="https://ui-avatars.com/api/?name=Bot&size=40&background=d3d3d3&rounded=true"
+            src="https://ui-avatars.com/api/?name=Bot&size=35&background=d3d3d3&rounded=true"
             class="user-icon"
           />
           <div class="message" [class.userStyleColor]="isUser(message.sender)">
@@ -36,7 +36,7 @@
           <div *ngFor="let b of button">
             <button
               type="button"
-              class="btn btn-info issue-button mx-2"
+              class="btn btn-outline-warning issue-button mx-2"
               id="{{ b }}"
               (click)="cardResponse(b)"
               value="{{ b }}"

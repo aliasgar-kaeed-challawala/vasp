@@ -26,14 +26,8 @@ export class DynamodbreadService {
     comments: string,
     email: string
   ) {
-    return this.Http.post(
-      environment.apiUrl + '/tickets/' + sno,
-      {
-        status,
-        comments,
-        email,
-      },
-      { headers: { 'Content-Type': 'application/json' } }
+    return this.Http.get(
+      `${environment.apiUrl}/tickets/${sno}/update?status=${status}&comments=${comments}&email=${email}`
     );
   }
 
