@@ -70,13 +70,18 @@
           <label for="status">Status</label>
         </div>
         <div class="form-floating">
-          <textarea #comments class="form-control comments" id="comments" rows="3"></textarea>
+          <textarea
+            #comments
+            class="form-control comments"
+            id="comments"
+            rows="3"
+          ></textarea>
           <label id="cmt-lbl" for="comments">Comments</label>
         </div>
         <button
           type="button"
           class="btn text-white small"
-          (click)="updateStatus(status.value,comments.value)"
+          (click)="updateStatus(status.value, comments.value, email.value)"
         >
           <strong>Update</strong>
         </button>
@@ -85,8 +90,14 @@
           class="btn back text-white small"
           (click)="back()"
         >
-          
-          <strong><span><i class='fas fa-angle-left' style='font-size:16px;color:white'></i></span>Back</strong>
+          <strong
+            ><span
+              ><i
+                class="fas fa-angle-left"
+                style="font-size: 16px; color: white"
+              ></i></span
+            >Back</strong
+          >
         </button>
       </div>
     </div>

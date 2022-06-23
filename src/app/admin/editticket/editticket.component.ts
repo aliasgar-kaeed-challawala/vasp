@@ -6,33 +6,30 @@ import { DynamodbreadService } from 'src/app/dynamodbread.service';
 @Component({
   selector: 'app-editticket',
   templateUrl: './editticket.component.html',
-  styleUrls: ['./editticket.component.scss']
+  styleUrls: ['./editticket.component.scss'],
 })
 export class EditticketComponent implements OnInit {
   ticket: any;
-  ticketid:any='';
-  constructor(public dynamodb:DynamodbreadService,private route:ActivatedRoute,public router:Router) { }
+  ticketid: any = '';
+  constructor(
+    public dynamodb: DynamodbreadService,
+    private route: ActivatedRoute,
+    public router: Router
+  ) {}
 
   ngOnInit(): void {
     this.ticketid = this.route.snapshot.paramMap.get('id');
-   this.dynamodb.readSingleItem(this.ticketid).then((data:any)=>{
-
-    this.ticket = data; 
-    this.ticketid = data.Item['sno']; 
-
-    })
-    
+    console.log(this.dynamodb.readSingleItem(this.ticketid));
   }
-  updateStatus(status:string,comment:string){
-    console.log(comment);
-    
-    this.dynamodb.updateItems(this.ticketid,status).then(()=>{
-      this.back();
-    })
-    
-
+  updateStatus(status: string, comment: string, email: string) {
+    this.dynamodb
+      .updateItems(this.ticketid, status, comment, email)
+      .then(() => {
+        this.back();
+      });
   }
-  back(){
+
+  back() {
     this.router.navigate(['admin/dashboard/tickets']);
   }
 }

@@ -3,86 +3,47 @@ import { Injectable } from '@angular/core';
 import * as AWS from 'aws-sdk';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DynamodbreadService {
-  private data = new AWS.DynamoDB();
+  constructor(
+    private cognitoService: CognitoService,
+    private Http: HttpClient
+  ) {}
 
-  private docClient = new AWS.DynamoDB.DocumentClient({
-    accessKeyId: environment.accessKeyId,
-    secretAccessKey: environment.secretAccessKey,
-    region: environment.region,
-  });
-
-  private params = {
-    TableName: 'vasp-data',
-  };
-
-  constructor(private cognitoService: CognitoService) {}
-
-  public readItems() {
-    return Observable.create(
-      (observer: {
-        error: (arg0: AWS.AWSError) => void;
-        next: (arg0: AWS.DynamoDB.DocumentClient.AttributeMap[]) => void;
-      }) => {
-        this.docClient.scan(this.params, (err, data) => {
-          if (err) {
-            observer.error(err);
-          } else {
-            observer.next(
-              data.Items!.map((item) => {
-                return item;
-              })
-            );
-          }
-        });
-      }
-    );
-  }
+  public readItems() {}
 
   public getItems(): Observable<any[]> {
-    return this.readItems();
+    return this.Http.get<any[]>(environment.apiUrl + '/tickets');
   }
 
-  async updateItems(sno: string, status: string) {
-    const params = {
-      TableName: 'vasp-data',
-      Key: {
-        sno: sno,
-      },
-      ExpressionAttributeNames: { '#s': 'Status' },
-      UpdateExpression: 'set #s = :p',
-      ExpressionAttributeValues: {
-        ':p': status,
-      },
-      ReturnValues: 'UPDATED_NEW',
-    };
-    
-    return this.docClient.update(params).promise();
+  async updateItems(
+    sno: string,
+    status: string,
+    comments: string,
+    email: string
+  ) {
+    return this.Http.post(environment.apiUrl + '/tickets/' + sno, {
+      status,
+      comments,
+      email,
+    });
   }
 
   async readSingleItem(sno: string) {
-    var params = {
-      Key: {
-        sno: sno,
-      },
-      TableName: 'vasp-data',
-    };
-    return await this.docClient.get(params).promise();
+    return this.Http.get<any>(environment.apiUrl + '/tickets/' + sno).subscribe(
+      (data) => {}
+    );
   }
 
-  async getItemsByAuth() {
-    var params = {
-      TableName: 'vasp-data',
-    };
-    var res = await this.docClient.scan(params).promise();
+  public getItemsByAuth() {
     return this.cognitoService.getUser().then((user) => {
-      return res.Items?.filter((item) => {
-        return item['User'] === user.attributes.email;
-      });
+      return this.Http.get<any[]>(
+        environment.apiUrl + '/tickets/users/' + user.attributes.email
+      );
     });
   }
 }

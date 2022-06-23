@@ -4,10 +4,9 @@ import { DynamodbreadService } from 'src/app/dynamodbread.service';
 @Component({
   selector: 'app-alltickets',
   templateUrl: './alltickets.component.html',
-  styleUrls: ['./alltickets.component.scss']
+  styleUrls: ['./alltickets.component.scss'],
 })
 export class AllticketsComponent implements OnInit {
-
   constructor(private dynomoService: DynamodbreadService) {}
 
   status: string = '';
@@ -18,7 +17,7 @@ export class AllticketsComponent implements OnInit {
   ngOnInit(): void {
     this.dynomoService.getItems().subscribe((data) => {
       this.tickets = data;
-      console.log(data);
+      console.log(this.tickets);
     });
   }
 
@@ -45,5 +44,4 @@ export class AllticketsComponent implements OnInit {
       this.tickets = data;
     });
   }
-
 }

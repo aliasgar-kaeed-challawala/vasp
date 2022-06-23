@@ -9,7 +9,7 @@ import { SignInComponent } from './Auth/sign-in/sign-in.component';
 import { ProfileComponent } from './Auth/profile/profile.component';
 import { NavbarComponent } from './Auth/Components/navbar/navbar.component';
 import { VerifyComponent } from './Auth/verify/verify.component';
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,14 +18,10 @@ import { VerifyComponent } from './Auth/verify/verify.component';
     SignInComponent,
     ProfileComponent,
     NavbarComponent,
-    VerifyComponent
+    VerifyComponent,
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    AppRoutingModule,
-  ],
+  imports: [BrowserModule, FormsModule, AppRoutingModule, HttpClientModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

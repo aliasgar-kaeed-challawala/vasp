@@ -59,7 +59,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let ticket of tickets">
+            <tr *ngFor="let ticket of tickets.Items">
               <th scope="row">{{ ticket.sno }}</th>
               <td>{{ticket.User}}</td>
               <td>{{ ticket.Device ?? "" }}</td>
@@ -80,7 +80,7 @@
                 <a [routerLink]="['edit',ticket.sno]"><button type="button" class="btn btn-outline-warning">Edit</button></a>
               </td>
             </tr>
-            <tr *ngIf="tickets.length == 0">
+            <tr *ngIf="tickets.Items.length == 0">
               <td colspan="100" class="text-center">No tickets found</td>
             </tr>
           </tbody>
