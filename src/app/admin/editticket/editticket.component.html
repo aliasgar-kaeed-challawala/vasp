@@ -9,7 +9,7 @@
             type="email"
             #email
             class="form-control"
-            [value]="ticket && ticket.Item['User']"
+            [value]="(ticket && ticket.Item['User']) || ''"
             id="name"
             readonly
           />
@@ -20,7 +20,7 @@
             type="text"
             #device
             class="form-control"
-            [value]="ticket && ticket.Item['Device']"
+            [value]="(ticket && ticket.Item['Device']) || ''"
             id="device"
             readonly
           />
@@ -31,7 +31,7 @@
             type="text"
             #issue
             class="form-control"
-            [value]="ticket && ticket.Item['Issue']"
+            [value]="(ticket && ticket.Item['Issue']) || ''"
             id="issue"
             readonly
           />
@@ -42,7 +42,7 @@
             type="text"
             #toissue
             class="form-control"
-            [value]="ticket && ticket.Item['Type of Issue']"
+            [value]="(ticket && ticket.Item['Type of Issue']) || ''"
             id="tofissue"
             readonly
           />
@@ -75,7 +75,7 @@
             class="form-control comments"
             id="comments"
             rows="3"
-            [value]="ticket && ticket.Item['Comments']"
+            [value]="(ticket && ticket.Item['Comments']) || ''"
           ></textarea>
           <label id="cmt-lbl" for="comments">Comments</label>
         </div>
